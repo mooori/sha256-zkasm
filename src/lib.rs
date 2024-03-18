@@ -1,7 +1,8 @@
-//#![no_main]
-//#![no_std]
+#![no_main]
+#![no_std]
 
-//use panic_halt as _;
+#[cfg(target_arch = "wasm32")]
+use panic_halt as _;
 
 use sha2::{Digest, Sha256};
 
@@ -23,7 +24,7 @@ fn subslice_to_u64(slice: &[u8], begin: usize, end: usize) -> u64 {
     result
 }
 
-//#[no_mangle]
+#[no_mangle]
 pub fn main() {
     let mut hasher = Sha256::new();
     hasher.update(b"hello world");
